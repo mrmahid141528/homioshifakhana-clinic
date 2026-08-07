@@ -16,6 +16,10 @@ CREATE TABLE site_settings (
   instagram_url         TEXT,
   meta_title            TEXT,                         -- Default/global SEO title
   meta_description      TEXT,                         -- Default/global SEO description
+  logo_url              TEXT,
+  admin_logo_url        TEXT,
+  privacy_policy        TEXT,
+  terms_of_service      TEXT,
   updated_at            TIMESTAMPTZ DEFAULT now()
 );
 

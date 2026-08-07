@@ -6,11 +6,10 @@ import { LayoutDashboard, Settings, Stethoscope, Activity, Users, LogOut, Menu, 
 import { useState } from "react";
 
 const NAV_LINKS = [
-    { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-    { href: "/dashboard/settings", label: "Site Settings", icon: Settings },
-    { href: "/dashboard/doctors", label: "Doctors", icon: Stethoscope },
-    { href: "/dashboard/treatments", label: "Treatments", icon: Activity },
-    { href: "/dashboard/leads", label: "Leads", icon: Users },
+    { href: "/admin", label: "Overview", icon: LayoutDashboard },
+    { href: "/admin/settings", label: "Site Settings", icon: Settings },
+    { href: "/admin/doctors", label: "Doctors", icon: Stethoscope },
+    { href: "/admin/treatments", label: "Treatments", icon: Activity },
 ];
 
 export function AdminSidebar() {

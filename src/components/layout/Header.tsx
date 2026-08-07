@@ -1,52 +1,105 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Phone, MessageCircle, MapPin, Clock, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 
 export function Header() {
     const pathname = usePathname();
-    const router = useRouter();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const isHome = pathname === "/";
+    return (
+        <>
+            {/* Top Bar (Desktop Only) */}
+            <div className="hidden md:flex bg-primary-dark-green text-clean-white py-2 px-4 text-sm font-medium">
+                <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
+                    <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2">
+                            <MapPin size={16} />
+                            <span>Address, New, Gum, Calchori, 31734</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Clock size={16} />
+                            <span>Time - 7:00 PM</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button className="bg-accent-gold text-white px-4 py-1 rounded-full font-bold hover:bg-yellow-600 transition text-sm">
+                            Book Appointment
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-    // For subpages on mobile, strictly a back arrow
-    if (!isHome) {
-        return (
-            <header className="bg-primary-dark-green text-clean-white p-4 sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto flex items-center h-10">
+            {/* Main Navigation */}
+            <header className="bg-white shadow-sm sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2">
+                        <div className="text-primary-dark-green flex flex-col items-center justify-center font-bold text-2xl">
+                            <span className="text-3xl leading-none">☤</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="font-bold text-xl text-primary-dark-green leading-none">হোমিও চিকিৎসা খানা</span>
+                            <span className="text-xs text-neutral-gray tracking-wide">Homeopathy Clinic</span>
+                        </div>
+                    </Link>
+
+                    {/* Desktop Nav Links */}
+                    <nav className="hidden lg:flex items-center gap-6 font-semibold text-neutral-gray">
+                        <Link href="/" className={`${pathname === '/' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>Home</Link>
+                        <Link href="/about" className={`${pathname === '/about' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>About</Link>
+                        <Link href="/doctors" className={`${pathname === '/doctors' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>Doctors</Link>
+                        <Link href="/treatments" className={`${pathname === '/treatments' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>Treatments</Link>
+                        <Link href="/blog" className={`${pathname === '/blog' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>Blog</Link>
+                        <Link href="/contact" className={`${pathname === '/contact' ? 'text-primary-dark-green border-b-2 border-primary-dark-green' : 'hover:text-primary-dark-green'}`}>Contact</Link>
+                    </nav>
+
+                    {/* Desktop Action Buttons */}
+                    <div className="hidden lg:flex items-center gap-3">
+                        <Button className="bg-accent-gold text-white border-none text-sm px-5 py-2 hover:bg-yellow-600 gap-2">
+                            <Phone size={16} /> Call Now
+                        </Button>
+                        <Button className="bg-primary-dark-green text-white border-none text-sm px-5 py-2 hover:bg-teal-800 gap-2">
+                            <MessageCircle size={16} /> WhatsApp Appointment
+                        </Button>
+                    </div>
+
+                    {/* Mobile Hamburger Toggle */}
                     <button
-                        onClick={() => router.push('/')}
-                        className="flex items-center gap-2 font-semibold hover:text-gray-200 transition-colors"
+                        className="lg:hidden text-primary-dark-green p-2"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     >
-                        <ArrowLeft size={24} />
-                        <span>হোম</span>
+                        {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
+
+                {/* Mobile Dropdown Menu */}
+                {mobileMenuOpen && (
+                    <div className="lg:hidden bg-white border-t border-gray-100 px-4 py-4 absolute w-full shadow-lg">
+                        <nav className="flex flex-col gap-4 font-semibold text-neutral-gray mb-6">
+                            <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                            <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+                            <Link href="/doctors" onClick={() => setMobileMenuOpen(false)}>Doctors</Link>
+                            <Link href="/treatments" onClick={() => setMobileMenuOpen(false)}>Treatments</Link>
+                            <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                        </nav>
+                    </div>
+                )}
             </header>
-        );
-    }
 
-    // Home Page Header
-    return (
-        <header className="bg-primary-dark-green text-clean-white p-4 sticky top-0 z-50">
-            <div className="max-w-6xl mx-auto flex justify-between items-center">
-                <Link href="/" className="font-bold text-xl tracking-tight">
-                    হোমিও চিকিৎসা খানা
-                </Link>
-
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-6">
-                    <Link href="/about" className="hover:text-gray-200 transition-colors">About</Link>
-                    <Link href="/doctors" className="hover:text-gray-200 transition-colors">Doctors</Link>
-                    <Link href="/treatments" className="hover:text-gray-200 transition-colors">Treatments</Link>
-                    <Link href="/contact" className="hover:text-gray-200 transition-colors">Contact</Link>
-                    <Button variant="whatsapp" className="ml-4 py-2 px-4 shadow-none hover:shadow-lg">
-                        Book Appointment
-                    </Button>
-                </nav>
+            {/* Mobile Sticky Action Buttons (Visible only on mobile strictly under header as per mockup) */}
+            <div className="lg:hidden bg-white px-4 py-3 flex flex-col gap-2 border-b border-gray-100">
+                <Button className="bg-primary-dark-green text-white w-full flex justify-center py-2 text-sm rounded-full gap-2">
+                    <Phone size={16} /> Call Now
+                </Button>
+                <Button className="bg-primary-dark-green text-white w-full flex justify-center py-2 text-sm rounded-full gap-2">
+                    <MessageCircle size={16} /> WhatsApp Appointment
+                </Button>
             </div>
-        </header>
+        </>
     );
 }

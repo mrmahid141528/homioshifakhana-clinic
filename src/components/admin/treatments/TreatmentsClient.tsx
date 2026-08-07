@@ -7,6 +7,7 @@ import * as z from "zod";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Pencil, Trash2, PlusCircle, X, Loader2, GripVertical } from "lucide-react";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 // --- Schema ---
 const faqSchema = z.object({
@@ -195,6 +196,13 @@ export function TreatmentsClient({ initialTreatments }: { initialTreatments: any
                                         <label className="block text-sm font-semibold mb-1">Display Order</label>
                                         <input type="number" {...register('display_order')} className="w-full border rounded-lg p-3 bg-gray-50" />
                                     </div>
+                                </div>
+                                <div>
+                                    <ImageUploader
+                                        label="Treatment Thumbnail/Icon"
+                                        value={watch('icon_or_image_url')}
+                                        onChange={(url) => setValue('icon_or_image_url', url, { shouldValidate: true })}
+                                    />
                                 </div>
                             </div>
 

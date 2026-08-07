@@ -7,6 +7,7 @@ import * as z from "zod";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { Pencil, Trash2, PlusCircle, X, Loader2, ArrowUp, ArrowDown } from "lucide-react";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 // --- Schema ---
 const docSchema = z.object({
@@ -27,7 +28,7 @@ export function DoctorsClient({ initialDoctors }: { initialDoctors: any[] }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingDoc, setEditingDoc] = useState<Doctor | null>(null);
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<Doctor>({
+    const { register, handleSubmit, reset, watch, setValue, formState: { errors, isSubmitting } } = useForm<Doctor>({
         resolver: zodResolver(docSchema)
     });
 
@@ -163,8 +164,11 @@ export function DoctorsClient({ initialDoctors }: { initialDoctors: any[] }) {
                                     <input type="number" {...register('display_order')} className="w-full border rounded-lg p-2 bg-gray-50" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-semibold mb-1">Photo URL</label>
-                                    <input {...register('photo_url')} placeholder="Public URL after upload" className="w-full border rounded-lg p-2 bg-gray-50" />
+                                    <ImageUploader
+                                        label="Doctor Photo"
+                                        value={watch('photo_url')}
+                                        onChange={(url) => setValue('photo_url', url, { shouldValidate: true })}
+                                    />
                                 </div>
                             </div>
 

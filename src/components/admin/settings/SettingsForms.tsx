@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { supabase } from "@/lib/supabase/client";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 // --- Custom Button Component ---
 function SubmitBtn({ isSubmitting }: { isSubmitting: boolean }) {
@@ -32,7 +33,7 @@ const generalSchema = z.object({
 });
 
 export function GeneralInfoForm({ initialData }: { initialData: any }) {
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<z.infer<typeof generalSchema>>({
+    const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<z.infer<typeof generalSchema>>({
         resolver: zodResolver(generalSchema),
         defaultValues: {
             clinic_name: initialData?.clinic_name || "",
@@ -74,19 +75,28 @@ export function GeneralInfoForm({ initialData }: { initialData: any }) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-semibold mb-1">Website Logo URL</label>
-                    <input {...register('logo_url')} className="w-full border rounded-lg p-2 bg-gray-50 focus:outline-primary-dark-green" placeholder="Public image URL" />
+                    <ImageUploader
+                        label="Website Logo"
+                        value={watch('logo_url')}
+                        onChange={(url) => setValue('logo_url', url, { shouldValidate: true })}
+                    />
                     {errors.logo_url && <p className="text-red-500 text-xs mt-1">{errors.logo_url.message}</p>}
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold mb-1">Admin Panel Logo URL</label>
-                    <input {...register('admin_logo_url')} className="w-full border rounded-lg p-2 bg-gray-50 focus:outline-primary-dark-green" placeholder="Public image URL" />
+                    <ImageUploader
+                        label="Admin Panel Logo"
+                        value={watch('admin_logo_url')}
+                        onChange={(url) => setValue('admin_logo_url', url, { shouldValidate: true })}
+                    />
                     {errors.admin_logo_url && <p className="text-red-500 text-xs mt-1">{errors.admin_logo_url.message}</p>}
                 </div>
             </div>
             <div>
-                <label className="block text-sm font-semibold mb-1">Hero Banner Image URL (Home Page)</label>
-                <input {...register('hero_image_url')} className="w-full border rounded-lg p-2 bg-gray-50 focus:outline-primary-dark-green" placeholder="Public image URL" />
+                <ImageUploader
+                    label="Hero Banner Image (Home Page)"
+                    value={watch('hero_image_url')}
+                    onChange={(url) => setValue('hero_image_url', url, { shouldValidate: true })}
+                />
                 {errors.hero_image_url && <p className="text-red-500 text-xs mt-1">{errors.hero_image_url.message}</p>}
             </div>
 

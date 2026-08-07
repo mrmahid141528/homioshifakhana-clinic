@@ -36,35 +36,6 @@ export default async function Home() {
                         </div>
                     </div>
 
-                    {/* Right Floating Form */}
-                    <div className="w-full md:w-[400px] shrink-0">
-                        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 relative">
-                            <h3 className="text-2xl font-bold text-center text-gray-900 mb-1">Appointment Form</h3>
-                            <p className="text-center text-sm text-gray-500 mb-6">Confirm your appointment via WhatsApp</p>
-
-                            <form className="flex flex-col gap-4">
-                                <input type="text" placeholder="Name" className="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-primary-dark-green bg-gray-50/50" />
-                                <input type="tel" placeholder="Mobile" className="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-primary-dark-green bg-gray-50/50" />
-                                <input type="number" placeholder="Age" className="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-primary-dark-green bg-gray-50/50" />
-
-                                <select className="w-full border border-gray-200 rounded-lg p-3 text-gray-500 focus:outline-none focus:border-primary-dark-green bg-gray-50/50 appearance-none">
-                                    <option value="" disabled selected>Disease Dropdown</option>
-                                    {treatments.map((t: any) => (
-                                        <option key={t.slug} value={t.title}>{t.title}</option>
-                                    ))}
-                                    <option>Other</option>
-                                </select>
-
-                                <div className="relative">
-                                    <input type="date" placeholder="Preferred Date" className="w-full border border-gray-200 rounded-lg p-3 text-gray-500 focus:outline-none focus:border-primary-dark-green bg-gray-50/50" />
-                                </div>
-
-                                <Button className="w-full bg-[#C9A227] text-white mt-2 rounded-lg py-3 font-bold border-none shadow-md hover:shadow-lg hover:bg-yellow-600 transition flex items-center justify-center gap-2">
-                                    Confirm Appointment <br className="lg:hidden" /> via WhatsApp <MessageCircle size={18} />
-                                </Button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </section>
 

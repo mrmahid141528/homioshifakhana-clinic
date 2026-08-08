@@ -19,12 +19,14 @@ export default async function Home() {
                 style={settings.hero_image_url ? { backgroundImage: `url(${settings.hero_image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
             >
                 {/* Decorative background element to ensure text readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-50/95 via-teal-50/80 to-transparent z-0"></div>
+                <div className="absolute inset-y-0 left-0 w-full md:w-3/4 lg:w-2/3 bg-gradient-to-r from-teal-50/95 via-teal-50/70 to-transparent z-0"></div>
+                {/* Fallback light overlay for mobile */}
+                <div className="absolute inset-0 bg-teal-50/40 md:hidden z-0"></div>
 
-                <div className="max-w-7xl mx-auto px-4 pt-16 pb-32 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+                <div className="max-w-7xl mx-auto px-4 pt-16 pb-32 md:py-32 relative z-10">
 
                     {/* Left Text */}
-                    <div className="flex-1 text-center md:text-left">
+                    <div className="w-full md:w-1/2 lg:w-7/12 text-center md:text-left">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4">
                             {settings.hero_heading}
                         </h1>

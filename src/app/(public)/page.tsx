@@ -4,6 +4,7 @@ import { MessageCircle, Phone, Calendar } from "lucide-react";
 export const revalidate = 0;
 import { getSiteSettings, getTreatments, getDoctors } from "@/lib/api";
 import { TreatmentCard } from "@/components/ui/TreatmentCard";
+import { HeroSlider } from "@/components/ui/HeroSlider";
 import { Button } from "@/components/ui/Button";
 
 export default async function Home() {
@@ -14,38 +15,13 @@ export default async function Home() {
     return (
         <div className="bg-white min-h-screen">
 
-            {/* 2. Hero Section */}
-            <section
-                className="relative bg-teal-50/50 overflow-hidden"
-                style={settings.hero_image_url ? { backgroundImage: `url(${settings.hero_image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
-            >
-                {/* Decorative background element to ensure text readability */}
-                <div className="absolute inset-y-0 left-0 w-full md:w-3/4 lg:w-2/3 bg-gradient-to-r from-teal-50/95 via-teal-50/70 to-transparent z-0"></div>
-                {/* Fallback light overlay for mobile */}
-                <div className="absolute inset-0 bg-teal-50/40 md:hidden z-0"></div>
-
-                <div className="max-w-7xl mx-auto px-4 pt-16 pb-32 md:py-32 relative z-10">
-
-                    {/* Left Text */}
-                    <div className="w-full md:w-1/2 lg:w-7/12 text-center md:text-left">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4">
-                            {settings.hero_heading}
-                        </h1>
-                        <p className="text-gray-600 text-lg mb-8 max-w-lg mx-auto md:mx-0">
-                            {settings.tagline}
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                            <Button className="bg-accent-gold text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition">
-                                Call Now
-                            </Button>
-                            <Button className="bg-primary-dark-green text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition flex items-center gap-2">
-                                <MessageCircle size={20} /> WhatsApp Appointment
-                            </Button>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
+            {/* 2. Hero Section (Dynamic Slider) */}
+            <HeroSlider
+                images={settings.hero_images || [settings.hero_image_url].filter(Boolean)}
+                intervalSec={settings.hero_slide_interval_sec}
+                heading={settings.hero_heading}
+                tagline={settings.tagline}
+            />
 
             {/* 3. Authority Bar */}
             <section className="max-w-6xl mx-auto px-4 relative -mt-16 z-20 mb-20">

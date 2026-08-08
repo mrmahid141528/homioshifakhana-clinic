@@ -80,19 +80,19 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
 
             <div className="max-w-7xl mx-auto px-2 sm:px-4 py-6 md:py-32 relative z-20 w-full flex">
                 {/* Left Text */}
-                <div className="w-full md:w-1/2 lg:w-7/12 !text-left flex flex-col items-start justify-center transition-all">
-                    <h1 className="text-lg sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-1 sm:mb-4 drop-shadow-sm !text-left w-full">
+                <div className="w-[65%] sm:w-1/2 lg:w-7/12 !text-left flex flex-col items-start justify-center transition-all">
+                    <h1 className="text-xs sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-1 sm:mb-4 drop-shadow-sm !text-left w-full">
                         {heading || "Natural Homeopathic Treatment"}
                     </h1>
-                    <p className="text-gray-600 text-[10px] sm:text-base md:text-lg w-[80%] md:w-full mb-3 sm:mb-8 font-medium !text-left">
+                    <p className="text-gray-600 text-[8px] sm:text-base md:text-lg w-[90%] md:w-full mb-2 sm:mb-8 font-medium !text-left leading-tight">
                         {tagline || "Discover enduring health solutions for your family."}
                     </p>
-                    <div className="flex flex-row gap-2 sm:gap-4 justify-start w-full">
-                        <Button className="bg-accent-gold text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[10px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition">
+                    <div className="flex flex-row gap-1 sm:gap-4 justify-start w-full">
+                        <Button className="bg-accent-gold text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition">
                             Call Now
                         </Button>
-                        <Button className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[10px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-1 sm:gap-2">
-                            <MessageCircle size={14} className="sm:hidden" />
+                        <Button className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-1 sm:gap-2">
+                            <MessageCircle size={10} className="sm:hidden" />
                             <MessageCircle size={20} className="hidden sm:block" />
                             WhatsApp
                         </Button>

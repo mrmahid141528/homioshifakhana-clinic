@@ -27,7 +27,8 @@ const generalSchema = z.object({
     tagline: z.string().optional(),
     hero_heading: z.string().optional(),
     about_text: z.string().optional(),
-    hero_image_url: z.string().url("Must be valid URL").optional().or(z.literal("")),
+    hero_images: z.array(z.string().url("Must be a valid URL")).optional(),
+    hero_slide_interval_sec: z.coerce.number().min(1, "Must be at least 1s").optional(),
     logo_url: z.string().url("Must be valid URL").optional().or(z.literal("")),
     admin_logo_url: z.string().url("Must be valid URL").optional().or(z.literal("")),
 });
@@ -41,7 +42,8 @@ export function GeneralInfoForm({ initialData }: { initialData: any }) {
             tagline: initialData?.tagline || "",
             hero_heading: initialData?.hero_heading || "",
             about_text: initialData?.about_text || "",
-            hero_image_url: initialData?.hero_image_url || "",
+            hero_images: initialData?.hero_images || [],
+            hero_slide_interval_sec: initialData?.hero_slide_interval_sec || 5,
             logo_url: initialData?.logo_url || "",
             admin_logo_url: initialData?.admin_logo_url || "",
         }
@@ -92,13 +94,40 @@ export function GeneralInfoForm({ initialData }: { initialData: any }) {
                     {errors.admin_logo_url && <p className="text-red-500 text-xs mt-1">{errors.admin_logo_url.message}</p>}
                 </div>
             </div>
-            <div>
-                <ImageUploader
-                    label="Hero Banner Image (Home Page)"
-                    value={watch('hero_image_url')}
-                    onChange={(url) => setValue('hero_image_url', url, { shouldValidate: true })}
-                />
-                {errors.hero_image_url && <p className="text-red-500 text-xs mt-1">{errors.hero_image_url.message}</p>}
+
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 flex flex-col gap-4">
+                <h3 className="font-bold text-gray-800 border-b pb-2">Hero Slider Configurations</h3>
+                <div>
+                    <label className="block text-sm font-semibold mb-1">Slide Timer (Seconds)</label>
+                    <input type="number" {...register('hero_slide_interval_sec')} className="w-full border rounded-lg p-2 bg-white focus:outline-primary-dark-green max-w-xs" />
+                </div>
+
+                <div className="flex flex-col gap-4">
+                    <label className="block text-sm font-semibold">Slider Images</label>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {(watch('hero_images') || []).map((url: string, index: number) => (
+                            <ImageUploader
+                                key={index}
+                                label={`Slide ${index + 1}`}
+                                value={url}
+                                onChange={(newUrl) => {
+                                    const curr = [...(watch('hero_images') || [])];
+                                    if (newUrl) { curr[index] = newUrl; } else { curr.splice(index, 1); }
+                                    setValue('hero_images', curr, { shouldValidate: true });
+                                }}
+                            />
+                        ))}
+                        {/* New Slide Upload Box */}
+                        <ImageUploader
+                            label="Add New Slide"
+                            onChange={(newUrl) => {
+                                if (newUrl) {
+                                    setValue('hero_images', [...(watch('hero_images') || []), newUrl], { shouldValidate: true })
+                                }
+                            }}
+                        />
+                    </div>
+                </div>
             </div>
 
             <div className="flex justify-end pt-2 border-t border-gray-100 mt-2">

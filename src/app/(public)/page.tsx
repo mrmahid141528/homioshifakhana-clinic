@@ -17,7 +17,7 @@ export default async function Home() {
 
             {/* 2. Hero Section (Dynamic Slider) */}
             <HeroSlider
-                images={settings.hero_images || [settings.hero_image_url].filter(Boolean)}
+                images={settings.hero_images?.length > 0 ? settings.hero_images : [settings.hero_image_url].filter(Boolean)}
                 intervalSec={settings.hero_slide_interval_sec}
                 heading={settings.hero_heading}
                 tagline={settings.tagline}

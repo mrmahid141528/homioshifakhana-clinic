@@ -98,15 +98,6 @@ export function Header({ logoUrl, clinicName }: { logoUrl?: string, clinicName?:
                 )}
             </header>
 
-            {/* Mobile Sticky Action Buttons (Visible only on mobile strictly under header as per mockup) */}
-            <div className="lg:hidden bg-white px-4 py-3 flex flex-col gap-2 border-b border-gray-100">
-                <Button className="bg-primary-dark-green text-white w-full flex justify-center py-2 text-sm rounded-full gap-2">
-                    <Phone size={16} /> Call Now
-                </Button>
-                <Button className="bg-primary-dark-green text-white w-full flex justify-center py-2 text-sm rounded-full gap-2">
-                    <MessageCircle size={16} /> WhatsApp Appointment
-                </Button>
-            </div>
         </>
     );
 }

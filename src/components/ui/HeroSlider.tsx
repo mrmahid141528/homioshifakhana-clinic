@@ -36,7 +36,7 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
 
     return (
         <section
-            className="relative bg-teal-50/50 overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center select-none"
+            className="relative bg-teal-50/50 overflow-hidden min-h-[400px] md:min-h-[600px] flex items-center select-none"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
@@ -80,10 +80,10 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
             {/* Fallback light overlay for mobile */}
             <div className="absolute inset-0 bg-teal-50/40 md:hidden z-10 pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-4 py-20 md:py-32 relative z-20 w-full">
+            <div className="max-w-7xl mx-auto px-4 py-16 md:py-32 relative z-20 w-full">
                 {/* Left Text */}
                 <div className="w-full md:w-1/2 lg:w-7/12 text-center md:text-left transition-all">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm">
                         {heading || "Natural Homeopathic Treatment"}
                     </h1>
                     <p className="text-gray-600 text-lg mb-8 max-w-lg mx-auto md:mx-0 font-medium">

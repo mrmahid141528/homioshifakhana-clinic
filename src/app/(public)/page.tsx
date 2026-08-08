@@ -24,8 +24,8 @@ export default async function Home() {
             />
 
             {/* 3. Authority Bar */}
-            <section className="max-w-6xl mx-auto px-4 relative -mt-16 z-20 mb-20">
-                <div className="bg-[#F0F8F6] border border-[#E0F2EF] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-around items-center gap-6 shadow-sm">
+            <section className="max-w-6xl mx-auto px-4 relative -mt-12 md:-mt-16 z-20 mb-12 md:mb-20">
+                <div className="bg-[#F0F8F6] border border-[#E0F2EF] rounded-2xl p-5 md:p-8 flex flex-col md:flex-row justify-around items-center md:items-center gap-4 md:gap-6 shadow-sm">
                     <div className="flex items-center gap-4 text-primary-dark-green">
                         <div className="bg-white p-3 rounded-full shadow-sm"><span className="text-xl">👨‍⚕️</span></div>
                         <div className="flex flex-col">
@@ -57,9 +57,9 @@ export default async function Home() {
             </section>
 
             {/* 4. Treatments Section */}
-            <section className="max-w-7xl mx-auto px-4 pb-20">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8">Treatments</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <section className="max-w-7xl mx-auto px-4 pb-12 md:pb-20">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 text-center md:text-left">Treatments</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     {treatments.map((t: any) => (
                         <TreatmentCard
                             key={t.slug}
@@ -73,7 +73,7 @@ export default async function Home() {
             </section>
 
             {/* 5. Why Choose Us */}
-            <section className="bg-[#F0F8F6] py-20 px-4">
+            <section className="bg-[#F0F8F6] py-12 md:py-20 px-4">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Why Choose Us?</h2>
@@ -92,7 +92,7 @@ export default async function Home() {
             </section>
 
             {/* 6. Meet The Doctors */}
-            <section className="py-20 px-4 max-w-7xl mx-auto">
+            <section className="py-12 md:py-20 px-4 max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Meet The Doctors</h2>
                     <Link href="/doctors" className="text-primary-dark-green font-bold hover:underline">View All &rarr;</Link>
@@ -116,7 +116,7 @@ export default async function Home() {
             </section>
 
             {/* 7. Treatment Process */}
-            <section className="bg-white py-20 px-4 border-t border-gray-100">
+            <section className="bg-white py-12 md:py-20 px-4 border-t border-gray-100">
                 <div className="max-w-7xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">How We Treat You</h2>
                     <div className="flex flex-col md:flex-row justify-center items-center gap-12">
@@ -140,7 +140,7 @@ export default async function Home() {
             </section>
 
             {/* 8. FAQ Section */}
-            <section className="bg-[#F0F8F6] py-20 px-4">
+            <section className="bg-[#F0F8F6] py-12 md:py-20 px-4">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-10 text-center">Frequently Asked Questions</h2>
                     <div className="flex flex-col gap-4">
@@ -155,12 +155,12 @@ export default async function Home() {
             </section>
 
             {/* 9. CTA Section */}
-            <section className="bg-primary-dark-green py-24 px-4 text-center">
+            <section className="bg-primary-dark-green py-16 md:py-24 px-4 text-center">
                 <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6">Ready to Start Your Healing Journey?</h2>
                 <p className="text-teal-100 mb-10 max-w-2xl mx-auto text-lg">Contact our experts today. We are here to guide your family toward lasting wellness.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button variant="whatsapp" className="px-8 py-4 text-lg">Chat on WhatsApp</Button>
-                    <Button className="bg-white text-primary-dark-green font-bold px-8 py-4 text-lg border-none hover:bg-gray-100 shadow-xl">Call Us Directly</Button>
+                    <Button variant="whatsapp" className="px-8 py-4 text-lg w-full sm:w-auto">Chat on WhatsApp</Button>
+                    <Button className="bg-white text-primary-dark-green font-bold px-8 py-4 text-lg border-none hover:bg-gray-100 shadow-xl w-full sm:w-auto">Call Us Directly</Button>
                 </div>
             </section>
 

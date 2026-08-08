@@ -33,12 +33,12 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
                 activeImages.map((img, index) => (
                     <div
                         key={index}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 opacity-0`}
+                        className={`absolute inset-0 transition-transform duration-1000 ease-in-out z-0`}
                         style={{
                             backgroundImage: `url(${img})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            opacity: index === currentIndex ? 1 : 0
+                            transform: `translateX(${(index - currentIndex) * 100}%)`
                         }}
                     ></div>
                 ))

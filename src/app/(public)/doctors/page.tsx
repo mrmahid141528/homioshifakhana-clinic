@@ -19,6 +19,7 @@ export default async function DoctorsPage() {
                             designation={doc.designation}
                             bio={doc.bio}
                             yearsExperience={doc.years_experience}
+                            photoUrl={doc.photo_url}
                         />
                     ))}
                 </div>

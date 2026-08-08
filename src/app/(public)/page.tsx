@@ -2,13 +2,14 @@ import Link from "next/link";
 import { MessageCircle, Phone, Calendar } from "lucide-react";
 
 export const revalidate = 0;
-import { getSiteSettings, getTreatments } from "@/lib/api";
+import { getSiteSettings, getTreatments, getDoctors } from "@/lib/api";
 import { TreatmentCard } from "@/components/ui/TreatmentCard";
 import { Button } from "@/components/ui/Button";
 
 export default async function Home() {
     const settings = await getSiteSettings();
     const treatments = await getTreatments();
+    const doctors = await getDoctors(3);
 
     return (
         <div className="bg-white min-h-screen">
@@ -120,21 +121,20 @@ export default async function Home() {
                     <Link href="/doctors" className="text-primary-dark-green font-bold hover:underline">View All &rarr;</Link>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="text-center">
-                        <div className="bg-gray-100 rounded-2xl h-64 mb-4 mx-auto w-full object-cover"></div>
-                        <h3 className="font-bold text-xl text-gray-900">Dr. A. Rahman</h3>
-                        <p className="text-primary-dark-green font-semibold">Chief Physician</p>
-                    </div>
-                    <div className="text-center">
-                        <div className="bg-gray-100 rounded-2xl h-64 mb-4 mx-auto w-full object-cover"></div>
-                        <h3 className="font-bold text-xl text-gray-900">Dr. S. Khatun</h3>
-                        <p className="text-primary-dark-green font-semibold">Senior Female Consultant</p>
-                    </div>
-                    <div className="text-center">
-                        <div className="bg-gray-100 rounded-2xl h-64 mb-4 mx-auto w-full object-cover"></div>
-                        <h3 className="font-bold text-xl text-gray-900">Dr. M. Ali</h3>
-                        <p className="text-primary-dark-green font-semibold">Homeopathy Expert</p>
-                    </div>
+                    {doctors.map((doc: any) => (
+                        <div key={doc.id} className="text-center">
+                            <div className="bg-gray-100 rounded-2xl h-64 mb-4 mx-auto w-full overflow-hidden flex items-center justify-center">
+                                {doc.photo_url ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img src={doc.photo_url} alt={doc.full_name} className="w-full h-full object-cover object-top" />
+                                ) : (
+                                    <span className="text-gray-400 opacity-50">No Photo</span>
+                                )}
+                            </div>
+                            <h3 className="font-bold text-xl text-gray-900">{doc.full_name}</h3>
+                            <p className="text-primary-dark-green font-semibold">{doc.designation}</p>
+                        </div>
+                    ))}
                 </div>
             </section>
 

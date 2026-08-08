@@ -7,14 +7,19 @@ interface DoctorCardProps {
     designation: string;
     bio: string;
     yearsExperience: number;
+    photoUrl?: string; // Newly added
 }
 
-export function DoctorCard({ fullName, qualification, designation, bio, yearsExperience }: DoctorCardProps) {
+export function DoctorCard({ fullName, qualification, designation, bio, yearsExperience, photoUrl }: DoctorCardProps) {
     return (
         <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div className="h-48 bg-gray-100 relative w-full flex items-center justify-center text-gray-400">
-                {/* Placeholder for Doctor Image */}
-                <span className="opacity-50">Photo Placeholder</span>
+            <div className="h-48 bg-gray-100 relative w-full flex items-center justify-center text-gray-400 overflow-hidden">
+                {photoUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={photoUrl} alt={fullName} className="w-full h-full object-cover object-top" />
+                ) : (
+                    <span className="opacity-50">Photo Placeholder</span>
+                )}
             </div>
             <div className="p-6">
                 <div className="mb-4">

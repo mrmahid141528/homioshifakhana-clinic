@@ -62,16 +62,17 @@ export function DoctorsClient({ initialDoctors }: { initialDoctors: any[] }) {
     };
 
     const onSubmit = async (data: DoctorForm) => {
+        const { id, ...payload } = data;
+
         if (editingDoc?.id) {
             // Update
-            const { error } = await supabase.from('doctors').update(data).eq('id', editingDoc.id);
+            const { error } = await supabase.from('doctors').update(payload).eq('id', editingDoc.id);
             if (error) return toast.error(error.message);
-            setDoctors((prev) => prev.map(d => d.id === editingDoc.id ? { ...data, id: editingDoc.id } : d));
+            setDoctors((prev) => prev.map(d => d.id === editingDoc.id ? { ...payload, id: editingDoc.id } : d));
             toast.success("Doctor updated!");
         } else {
             // Insert
-            const { id, ...insertData } = data;
-            const { data: newDoc, error } = await supabase.from('doctors').insert([insertData]).select().single();
+            const { data: newDoc, error } = await supabase.from('doctors').insert([payload]).select().single();
             if (error) return toast.error(error.message);
             setDoctors((prev) => [...prev, newDoc].sort((a, b) => (a.display_order || 0) - (b.display_order || 0)));
             toast.success("Doctor added!");

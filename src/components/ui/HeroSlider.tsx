@@ -13,11 +13,12 @@ interface HeroSliderProps {
 
 export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSliderProps) {
     const [history, setHistory] = useState({ prevIndex: -1, currentIndex: 0 });
+    const [isPaused, setIsPaused] = useState(false);
 
     const activeImages = images && images.length > 0 ? images : [];
 
     useEffect(() => {
-        if (activeImages.length <= 1) return;
+        if (activeImages.length <= 1 || isPaused) return;
 
         const timer = setInterval(() => {
             setHistory((prev) => ({
@@ -27,10 +28,17 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
         }, (intervalSec || 5) * 1000);
 
         return () => clearInterval(timer);
-    }, [activeImages.length, intervalSec]);
+    }, [activeImages.length, intervalSec, isPaused]);
 
     return (
-        <section className="relative bg-teal-50/50 overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center">
+        <section
+            className="relative bg-teal-50/50 overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center select-none"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            onTouchCancel={() => setIsPaused(false)}
+        >
             {/* Background Images */}
             {activeImages.length > 0 ? (
                 activeImages.map((img, index) => {

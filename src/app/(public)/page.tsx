@@ -92,63 +92,43 @@ export default async function Home() {
 
                     {/* Cards Grid */}
                     <div className="grid grid-cols-4 gap-2 sm:gap-6">
-
-                        {/* Card 1 (Active/Dark Theme) */}
-                        <div className="bg-primary-dark-green text-white p-3 sm:p-8 rounded-xl sm:rounded-[32px] flex flex-col justify-between shadow-lg items-start text-left h-full">
-                            <div>
-                                <div className="mb-2 sm:mb-6"><span className="text-lg sm:text-3xl">🛡️</span></div>
-                                <h3 className="text-[9px] sm:text-xl md:text-2xl font-bold mb-1 sm:mb-4 leading-tight">100% Safe Methods</h3>
-                                <p className="text-[#a5d4cc] text-[6px] sm:text-sm hidden sm:block leading-relaxed mb-4">
-                                    Long-lasting side-effect-free results addressing the root cause organically without complex procedures.
-                                </p>
+                        {[
+                            {
+                                title: "100% Safe Methods",
+                                icon: "🛡️",
+                                desc: "Long-lasting side-effect-free results addressing the root cause organically without complex procedures.",
+                            },
+                            {
+                                title: "Experienced Staff",
+                                icon: "👨‍⚕️",
+                                desc: "Our seasoned doctors bring decades of homeopathic expertise to ensure accurate diagnosis.",
+                            },
+                            {
+                                title: "Modern Diagnostics",
+                                icon: "🔬",
+                                desc: "Blending pure homeopathy with modern testing parameters to guarantee perfect remedies.",
+                            },
+                            {
+                                title: "Personalized Plans",
+                                icon: "🌿",
+                                desc: "Every patient's constitution is unique. Our plans are purely tailored to your immunity.",
+                            }
+                        ].map((item, index) => (
+                            <div key={index} className="group bg-[#E0F2EF] hover:bg-primary-dark-green transition-colors duration-300 p-3 sm:p-8 rounded-xl sm:rounded-[32px] flex flex-col justify-between items-start text-left h-full border border-teal-50 hover:border-transparent cursor-pointer shadow-sm hover:shadow-lg">
+                                <div>
+                                    <div className="mb-2 sm:mb-6">
+                                        <span className="text-lg sm:text-3xl text-primary-dark-green group-hover:text-white transition-colors duration-300 opacity-80 group-hover:opacity-100">{item.icon}</span>
+                                    </div>
+                                    <h3 className="text-[9px] sm:text-xl md:text-2xl font-bold text-gray-900 group-hover:text-white transition-colors duration-300 mb-1 sm:mb-4 leading-tight">{item.title}</h3>
+                                    <p className="text-gray-600 group-hover:text-[#a5d4cc] transition-colors duration-300 text-[6px] sm:text-sm hidden sm:block leading-relaxed mb-4">
+                                        {item.desc}
+                                    </p>
+                                </div>
+                                <Button className="bg-primary-dark-green group-hover:bg-white/20 text-white font-semibold py-1 sm:py-3 px-2 sm:px-6 text-[7px] sm:text-sm rounded-full w-fit hover:bg-teal-800 group-hover:hover:bg-white/30 border-none group-hover:border group-hover:border-white/30 transition-all duration-300">
+                                    View Details
+                                </Button>
                             </div>
-                            <Button className="bg-white/20 text-white font-semibold py-1 sm:py-3 px-2 sm:px-6 text-[7px] sm:text-sm rounded-full w-fit hover:bg-white/30 border border-white/30">
-                                View Details
-                            </Button>
-                        </div>
-
-                        {/* Card 2 (Light Theme) */}
-                        <div className="bg-[#E0F2EF] p-3 sm:p-8 rounded-xl sm:rounded-[32px] flex flex-col justify-between items-start text-left h-full border border-teal-50">
-                            <div>
-                                <div className="mb-2 sm:mb-6"><span className="text-lg sm:text-3xl text-primary-dark-green opacity-80">👨‍⚕️</span></div>
-                                <h3 className="text-[9px] sm:text-xl md:text-2xl font-bold text-gray-900 mb-1 sm:mb-4 leading-tight">Experienced Staff</h3>
-                                <p className="text-gray-600 text-[6px] sm:text-sm hidden sm:block leading-relaxed mb-4">
-                                    Our seasoned doctors bring decades of homeopathic expertise to ensure accurate diagnosis.
-                                </p>
-                            </div>
-                            <Button className="bg-primary-dark-green text-white font-semibold py-1 sm:py-3 px-2 sm:px-6 text-[7px] sm:text-sm rounded-full w-fit hover:bg-teal-800 border-none">
-                                View Details
-                            </Button>
-                        </div>
-
-                        {/* Card 3 (Light Theme) */}
-                        <div className="bg-[#E0F2EF] p-3 sm:p-8 rounded-xl sm:rounded-[32px] flex flex-col justify-between items-start text-left h-full border border-teal-50">
-                            <div>
-                                <div className="mb-2 sm:mb-6"><span className="text-lg sm:text-3xl text-primary-dark-green opacity-80">🔬</span></div>
-                                <h3 className="text-[9px] sm:text-xl md:text-2xl font-bold text-gray-900 mb-1 sm:mb-4 leading-tight">Modern Diagnostics</h3>
-                                <p className="text-gray-600 text-[6px] sm:text-sm hidden sm:block leading-relaxed mb-4">
-                                    Blending pure homeopathy with modern testing parameters to guarantee perfect remedies.
-                                </p>
-                            </div>
-                            <Button className="bg-primary-dark-green text-white font-semibold py-1 sm:py-3 px-2 sm:px-6 text-[7px] sm:text-sm rounded-full w-fit hover:bg-teal-800 border-none">
-                                View Details
-                            </Button>
-                        </div>
-
-                        {/* Card 4 (Light Theme) */}
-                        <div className="bg-[#E0F2EF] p-3 sm:p-8 rounded-xl sm:rounded-[32px] flex flex-col justify-between items-start text-left h-full border border-teal-50">
-                            <div>
-                                <div className="mb-2 sm:mb-6"><span className="text-lg sm:text-3xl text-primary-dark-green opacity-80">🌿</span></div>
-                                <h3 className="text-[9px] sm:text-xl md:text-2xl font-bold text-gray-900 mb-1 sm:mb-4 leading-tight">Personalized Plans</h3>
-                                <p className="text-gray-600 text-[6px] sm:text-sm hidden sm:block leading-relaxed mb-4">
-                                    Every patient's constitution is unique. Our plans are purely tailored to your immunity.
-                                </p>
-                            </div>
-                            <Button className="bg-primary-dark-green text-white font-semibold py-1 sm:py-3 px-2 sm:px-6 text-[7px] sm:text-sm rounded-full w-fit hover:bg-teal-800 border-none">
-                                View Details
-                            </Button>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>

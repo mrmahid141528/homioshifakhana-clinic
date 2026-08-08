@@ -1,0 +1,75 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/Button";
+import { MessageCircle } from "lucide-react";
+
+interface HeroSliderProps {
+    images: string[];
+    intervalSec: number;
+    heading: string;
+    tagline: string;
+}
+
+export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSliderProps) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const activeImages = images && images.length > 0 ? images : [];
+
+    useEffect(() => {
+        if (activeImages.length <= 1) return;
+
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % activeImages.length);
+        }, (intervalSec || 5) * 1000);
+
+        return () => clearInterval(timer);
+    }, [activeImages.length, intervalSec]);
+
+    return (
+        <section className="relative bg-teal-50/50 overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center">
+            {/* Background Images */}
+            {activeImages.length > 0 ? (
+                activeImages.map((img, index) => (
+                    <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 opacity-0`}
+                        style={{
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            opacity: index === currentIndex ? 1 : 0
+                        }}
+                    ></div>
+                ))
+            ) : (
+                <div className="absolute inset-0 bg-teal-50 z-0"></div>
+            )}
+
+            {/* Decorative background element to ensure text readability */}
+            <div className="absolute inset-y-0 left-0 w-full md:w-3/4 lg:w-2/3 bg-gradient-to-r from-teal-50/95 via-teal-50/70 to-transparent z-10 transition-all pointer-events-none"></div>
+            {/* Fallback light overlay for mobile */}
+            <div className="absolute inset-0 bg-teal-50/40 md:hidden z-10 pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto px-4 py-20 md:py-32 relative z-20 w-full">
+                {/* Left Text */}
+                <div className="w-full md:w-1/2 lg:w-7/12 text-center md:text-left transition-all">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm">
+                        {heading || "Natural Homeopathic Treatment"}
+                    </h1>
+                    <p className="text-gray-600 text-lg mb-8 max-w-lg mx-auto md:mx-0 font-medium">
+                        {tagline || "Discover enduring health solutions for your family."}
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <Button className="bg-accent-gold text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition">
+                            Call Now
+                        </Button>
+                        <Button className="bg-primary-dark-green text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition flex items-center gap-2">
+                            <MessageCircle size={20} /> WhatsApp Appointment
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

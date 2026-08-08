@@ -12,7 +12,7 @@ interface HeroSliderProps {
 }
 
 export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSliderProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [history, setHistory] = useState({ prevIndex: -1, currentIndex: 0 });
 
     const activeImages = images && images.length > 0 ? images : [];
 
@@ -20,7 +20,10 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
         if (activeImages.length <= 1) return;
 
         const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % activeImages.length);
+            setHistory((prev) => ({
+                prevIndex: prev.currentIndex,
+                currentIndex: (prev.currentIndex + 1) % activeImages.length
+            }));
         }, (intervalSec || 5) * 1000);
 
         return () => clearInterval(timer);
@@ -30,18 +33,32 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
         <section className="relative bg-teal-50/50 overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center">
             {/* Background Images */}
             {activeImages.length > 0 ? (
-                activeImages.map((img, index) => (
-                    <div
-                        key={index}
-                        className={`absolute inset-0 transition-transform duration-1000 ease-in-out z-0`}
-                        style={{
-                            backgroundImage: `url(${img})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            transform: `translateX(${(index - currentIndex) * 100}%)`
-                        }}
-                    ></div>
-                ))
+                activeImages.map((img, index) => {
+                    let translateX = '100%';
+                    let transition = 'none';
+
+                    if (index === history.currentIndex) {
+                        translateX = '0%';
+                        transition = 'transform 1s ease-in-out';
+                    } else if (index === history.prevIndex) {
+                        translateX = '-100%';
+                        transition = 'transform 1s ease-in-out';
+                    }
+
+                    return (
+                        <div
+                            key={index}
+                            className={`absolute inset-0 z-0`}
+                            style={{
+                                backgroundImage: `url(${img})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                transform: `translateX(${translateX})`,
+                                transition: transition
+                            }}
+                        ></div>
+                    );
+                })
             ) : (
                 <div className="absolute inset-0 bg-teal-50 z-0"></div>
             )}

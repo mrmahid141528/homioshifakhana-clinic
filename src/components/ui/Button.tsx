@@ -5,6 +5,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     variant?: 'primary' | 'whatsapp';
     fullWidth?: boolean;
+    href?: string;
+    target?: string;
 }
 
 export function Button({
@@ -12,9 +14,11 @@ export function Button({
     variant = 'primary',
     fullWidth = false,
     className = '',
+    href,
+    target,
     ...props
 }: ButtonProps) {
-    const baseStyles = "font-bold py-3 px-6 rounded-full transition-colors flex items-center justify-center gap-2";
+    const baseStyles = "font-bold py-3 px-6 rounded-full transition-colors flex items-center justify-center gap-2 text-center";
 
     const variants = {
         primary: "bg-primary-dark-green text-white hover:bg-teal-800",
@@ -22,6 +26,20 @@ export function Button({
     };
 
     const width = fullWidth ? "w-full" : "w-auto";
+
+    if (href) {
+        return (
+            <a
+                href={href}
+                target={target}
+                className={`${baseStyles} ${variants[variant]} ${width} ${className}`}
+                {...(props as any)}
+            >
+                {variant === 'whatsapp' && <MessageCircle size={20} />}
+                {children}
+            </a>
+        );
+    }
 
     return (
         <button

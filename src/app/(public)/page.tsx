@@ -12,6 +12,11 @@ export default async function Home() {
     const treatments = await getTreatments();
     const doctors = await getDoctors(3);
 
+    const callHref = settings.phone_number ? `tel:${settings.phone_number}` : `tel:+910000000000`;
+    const waHref = settings.whatsapp_number
+        ? `https://wa.me/${settings.whatsapp_number.replace(/\D/g, '')}?text=Hello,%20I%20want%20to%20book%20an%20appointment`
+        : `https://wa.me/910000000000?text=Hello`;
+
     return (
         <div className="bg-white min-h-screen">
 
@@ -21,6 +26,8 @@ export default async function Home() {
                 intervalSec={settings.hero_slide_interval_sec}
                 heading={settings.hero_heading}
                 tagline={settings.tagline}
+                phone={settings.phone_number}
+                whatsapp={settings.whatsapp_number}
             />
 
             {/* 3. Authority Bar */}
@@ -84,9 +91,9 @@ export default async function Home() {
                             </p>
                         </div>
                         <div className="pl-1 sm:pl-4 shrink-0">
-                            <Button className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[8px] sm:text-base rounded-full shadow-md hover:bg-teal-800 transition whitespace-nowrap border-none">
+                            <Link href="/contact" className="inline-block bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[8px] sm:text-base rounded-full shadow-md hover:bg-teal-800 transition whitespace-nowrap border-none">
                                 Book Now
-                            </Button>
+                            </Link>
                         </div>
                     </div>
 
@@ -197,8 +204,8 @@ export default async function Home() {
             <section className="bg-primary-dark-green py-8 sm:py-16 md:py-24 px-2 sm:px-4 text-center">
                 <h2 className="text-xl sm:text-3xl md:text-5xl font-extrabold text-white mb-2 sm:mb-6">Ready to Start?</h2>
                 <div className="flex flex-row gap-2 sm:gap-4 justify-center mt-4">
-                    <Button variant="whatsapp" className="px-2 sm:px-8 py-2 sm:py-4 text-[10px] sm:text-lg">WhatsApp</Button>
-                    <Button className="bg-white text-primary-dark-green font-bold px-2 sm:px-8 py-2 sm:py-4 text-[10px] sm:text-lg border-none hover:bg-gray-100 shadow-xl">Call Us</Button>
+                    <Button variant="whatsapp" href={waHref} target="_blank" className="px-2 sm:px-8 py-2 sm:py-4 text-[10px] sm:text-lg">WhatsApp</Button>
+                    <Button href={callHref} className="bg-white text-primary-dark-green font-bold px-2 sm:px-8 py-2 sm:py-4 text-[10px] sm:text-lg border-none hover:bg-gray-100 shadow-xl">Call Us</Button>
                 </div>
             </section>
 

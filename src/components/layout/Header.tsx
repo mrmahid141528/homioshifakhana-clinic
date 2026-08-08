@@ -6,9 +6,14 @@ import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, MapPin, Clock, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 
-export function Header({ logoUrl, clinicName }: { logoUrl?: string, clinicName?: string }) {
+export function Header({ logoUrl, clinicName, phone, whatsapp }: { logoUrl?: string, clinicName?: string, phone?: string, whatsapp?: string }) {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const callHref = phone ? `tel:${phone}` : `tel:+910000000000`;
+    const waHref = whatsapp
+        ? `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Hello,%20I%20want%20to%20book%20an%20appointment`
+        : `https://wa.me/910000000000`;
 
     return (
         <>
@@ -26,9 +31,9 @@ export function Header({ logoUrl, clinicName }: { logoUrl?: string, clinicName?:
                         </div>
                     </div>
                     <div>
-                        <button className="bg-accent-gold text-white px-4 py-1 rounded-full font-bold hover:bg-yellow-600 transition text-sm">
+                        <Link href="/contact" className="bg-accent-gold text-white px-4 py-1 rounded-full font-bold hover:bg-yellow-600 transition text-sm">
                             Book Appointment
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -67,10 +72,10 @@ export function Header({ logoUrl, clinicName }: { logoUrl?: string, clinicName?:
 
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex items-center gap-3">
-                        <Button className="bg-accent-gold text-white border-none text-sm px-5 py-2 hover:bg-yellow-600 gap-2">
+                        <Button href={callHref} className="bg-accent-gold text-white border-none text-sm px-5 py-2 hover:bg-yellow-600 gap-2">
                             <Phone size={16} /> Call Now
                         </Button>
-                        <Button className="bg-primary-dark-green text-white border-none text-sm px-5 py-2 hover:bg-teal-800 gap-2">
+                        <Button href={waHref} target="_blank" className="bg-primary-dark-green text-white border-none text-sm px-5 py-2 hover:bg-teal-800 gap-2">
                             <MessageCircle size={16} /> WhatsApp Appointment
                         </Button>
                     </div>

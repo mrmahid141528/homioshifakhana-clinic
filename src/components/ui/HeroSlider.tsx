@@ -9,11 +9,18 @@ interface HeroSliderProps {
     intervalSec: number;
     heading: string;
     tagline: string;
+    phone?: string;
+    whatsapp?: string;
 }
 
-export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSliderProps) {
+export function HeroSlider({ images, intervalSec, heading, tagline, phone, whatsapp }: HeroSliderProps) {
     const [history, setHistory] = useState({ prevIndex: -1, currentIndex: 0 });
     const [isPaused, setIsPaused] = useState(false);
+
+    const callHref = phone ? `tel:${phone}` : `tel:+910000000000`;
+    const waHref = whatsapp
+        ? `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=Hello,%20I%20want%20to%20book%20an%20appointment`
+        : `https://wa.me/910000000000`;
 
     const activeImages = images && images.length > 0 ? images : [];
 
@@ -88,10 +95,10 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
                         {tagline || "Discover enduring health solutions for your family."}
                     </p>
                     <div className="flex flex-row gap-1 sm:gap-4 justify-start w-full">
-                        <Button className="bg-accent-gold text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition">
+                        <Button href={callHref} className="bg-accent-gold text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition">
                             Call Now
                         </Button>
-                        <Button className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-1 sm:gap-2">
+                        <Button href={waHref} target="_blank" className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-2 sm:px-8 text-[8px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-1 sm:gap-2">
                             <MessageCircle size={10} className="sm:hidden" />
                             <MessageCircle size={20} className="hidden sm:block" />
                             WhatsApp

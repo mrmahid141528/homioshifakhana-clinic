@@ -14,7 +14,12 @@ export default async function PublicLayout({
 
     return (
         <>
-            <Header logoUrl={settings.logo_url} clinicName={settings.clinic_name} />
+            <Header
+                logoUrl={settings.logo_url}
+                clinicName={settings.clinic_name}
+                phone={settings.phone_number}
+                whatsapp={settings.whatsapp_number}
+            />
             <main className="min-h-screen">
                 {children}
             </main>

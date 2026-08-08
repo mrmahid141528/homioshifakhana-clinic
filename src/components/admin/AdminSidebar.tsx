@@ -12,7 +12,7 @@ const NAV_LINKS = [
     { href: "/admin/treatments", label: "Treatments", icon: Activity },
 ];
 
-export function AdminSidebar() {
+export function AdminSidebar({ adminLogoUrl }: { adminLogoUrl?: string }) {
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -21,7 +21,12 @@ export function AdminSidebar() {
             {/* Mobile Header Toggle */}
             <div className="lg:hidden fixed top-0 w-full bg-[#0F6B5B] text-white p-4 flex justify-between items-center z-50">
                 <div className="font-bold flex items-center gap-2">
-                    <span className="text-xl">☤</span>
+                    {adminLogoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={adminLogoUrl} alt="Admin Logo" className="h-6 object-contain bg-white rounded" />
+                    ) : (
+                        <span className="text-xl">☤</span>
+                    )}
                     <span>Admin</span>
                 </div>
                 <button onClick={() => setMobileOpen(!mobileOpen)}>
@@ -36,7 +41,12 @@ export function AdminSidebar() {
       `}>
 
                 <div className="hidden lg:flex p-6 border-b border-teal-800 items-center justify-center gap-2">
-                    <span className="text-white bg-teal-800 p-2 rounded-full font-bold">☤</span>
+                    {adminLogoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={adminLogoUrl} alt="Admin Logo" className="h-10 object-contain bg-white p-1 rounded" />
+                    ) : (
+                        <span className="text-white bg-teal-800 p-2 rounded-full font-bold">☤</span>
+                    )}
                     <div className="font-bold">
                         <div className="leading-none">Admin Panel</div>
                         <div className="text-xs font-normal text-teal-300 opacity-80 mt-1">Homio Shifa Khana</div>

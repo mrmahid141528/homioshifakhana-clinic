@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { getSiteSettings, getTreatments } from "@/lib/api";
+import { ContactForm } from "@/components/forms/ContactForm";
 
 export default async function ContactPage() {
     const settings = await getSiteSettings();
@@ -12,30 +13,10 @@ export default async function ContactPage() {
 
                 <div className="grid md:grid-cols-2 gap-8">
 
-                    {/* Appointment Form (Rendered loosely since Next Server Component lacks interactivity without client hooks) */}
+                    {/* Appointment Form (Interactive) */}
                     <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                         <h2 className="text-xl font-bold text-primary-dark-green mb-6">Book an Appointment</h2>
-                        <form className="flex flex-col gap-4">
-                            <div>
-                                <label className="block text-sm font-semibold text-neutral-gray mb-1">Patient Name</label>
-                                <input type="text" className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-primary-dark-green" placeholder="Full Name" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-semibold text-neutral-gray mb-1">Disease / Concern</label>
-                                <select className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-primary-dark-green">
-                                    {treatments.map((t: any) => (
-                                        <option key={t.slug} value={t.title}>{t.title}</option>
-                                    ))}
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <a href={`https://wa.me/${settings.whatsapp_number?.replace(/\+/g, '')}?text=Hello,%20I%20would%20like%20to%20book%20an%20appointment.`} target="_blank" rel="noopener noreferrer" className="mt-4 block">
-                                <Button variant="whatsapp" className="w-full" type="button">
-                                    Send Request via WhatsApp
-                                </Button>
-                            </a>
-                        </form>
+                        <ContactForm whatsapp={settings.whatsapp_number} treatments={treatments} />
                     </div>
 
                     {/* Clinic Info */}

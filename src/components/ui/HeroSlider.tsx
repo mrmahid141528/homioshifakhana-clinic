@@ -36,7 +36,7 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
 
     return (
         <section
-            className="relative bg-teal-50/50 overflow-hidden min-h-[400px] md:min-h-[600px] flex items-center select-none"
+            className="relative bg-teal-50/50 overflow-hidden min-h-[200px] sm:min-h-[400px] md:min-h-[600px] aspect-video md:aspect-auto flex items-center select-none"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
@@ -78,21 +78,23 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
             {/* Decorative background element to ensure text readability */}
             <div className="absolute inset-y-0 left-0 w-[95%] md:w-3/4 lg:w-2/3 bg-gradient-to-r from-teal-50/95 via-teal-50/70 to-transparent z-10 transition-all pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-4 py-16 md:py-32 relative z-20 w-full flex">
+            <div className="max-w-7xl mx-auto px-2 sm:px-4 py-6 md:py-32 relative z-20 w-full flex">
                 {/* Left Text */}
-                <div className="w-11/12 sm:w-full md:w-1/2 lg:w-7/12 !text-left flex flex-col items-start justify-center transition-all">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm !text-left w-full">
+                <div className="w-full md:w-1/2 lg:w-7/12 !text-left flex flex-col items-start justify-center transition-all">
+                    <h1 className="text-lg sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-1 sm:mb-4 drop-shadow-sm !text-left w-full">
                         {heading || "Natural Homeopathic Treatment"}
                     </h1>
-                    <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg font-medium !text-left w-full">
+                    <p className="text-gray-600 text-[10px] sm:text-base md:text-lg w-[80%] md:w-full mb-3 sm:mb-8 font-medium !text-left">
                         {tagline || "Discover enduring health solutions for your family."}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-start w-full">
-                        <Button className="bg-accent-gold text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition">
+                    <div className="flex flex-row gap-2 sm:gap-4 justify-start w-full">
+                        <Button className="bg-accent-gold text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[10px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition">
                             Call Now
                         </Button>
-                        <Button className="bg-primary-dark-green text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-2">
-                            <MessageCircle size={20} /> WhatsApp Appointment
+                        <Button className="bg-primary-dark-green text-white font-bold py-1 sm:py-3 px-3 sm:px-8 text-[10px] sm:text-base rounded-full border-none shadow-sm hover:shadow-md transition flex items-center justify-center gap-1 sm:gap-2">
+                            <MessageCircle size={14} className="sm:hidden" />
+                            <MessageCircle size={20} className="hidden sm:block" />
+                            WhatsApp
                         </Button>
                     </div>
                 </div>

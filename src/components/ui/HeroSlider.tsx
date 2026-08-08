@@ -17,18 +17,22 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
 
     const activeImages = images && images.length > 0 ? images : [];
 
+    // If exactly 2 images, duplicate them to 4. This gives the CSS slider enough DOM nodes to park 
+    // exiting items at +100% without visually rewinding them backward to 0%.
+    const sliderImages = activeImages.length === 2 ? [...activeImages, ...activeImages] : activeImages;
+
     useEffect(() => {
-        if (activeImages.length <= 1 || isPaused) return;
+        if (sliderImages.length <= 1 || isPaused) return;
 
         const timer = setInterval(() => {
             setHistory((prev) => ({
                 prevIndex: prev.currentIndex,
-                currentIndex: (prev.currentIndex + 1) % activeImages.length
+                currentIndex: (prev.currentIndex + 1) % sliderImages.length
             }));
         }, (intervalSec || 5) * 1000);
 
         return () => clearInterval(timer);
-    }, [activeImages.length, intervalSec, isPaused]);
+    }, [sliderImages.length, intervalSec, isPaused]);
 
     return (
         <section
@@ -40,8 +44,8 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
             onTouchCancel={() => setIsPaused(false)}
         >
             {/* Background Images */}
-            {activeImages.length > 0 ? (
-                activeImages.map((img, index) => {
+            {sliderImages.length > 0 ? (
+                sliderImages.map((img, index) => {
                     let translateX = '100%';
                     let transition = 'none';
 

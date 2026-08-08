@@ -17,6 +17,7 @@ export default async function TreatmentsPage() {
                             slug={t.slug}
                             title={t.title}
                             shortDescription={t.short_description}
+                            iconOrImageUrl={t.icon_or_image_url}
                         />
                     ))}
                 </div>

@@ -63,7 +63,7 @@ export default async function PublicLayout({
                             <li><a href="#" className="hover:text-primary-dark-green transition">Privacy Policy</a></li>
                             <li><a href="#" className="hover:text-primary-dark-green transition">Terms of Service</a></li>
                             <li className="mt-4 border-t border-gray-800 pt-4">
-                                <strong>Emergency Phone:</strong><br /><span className="text-accent-gold">+88 01XXXXXXXXX</span>
+                                <strong>Emergency Phone:</strong><br /><span className="text-accent-gold">{settings.emergency_contact || "Not Configured"}</span>
                             </li>
                         </ul>
                     </div>

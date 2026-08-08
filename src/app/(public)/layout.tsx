@@ -1,6 +1,9 @@
 import React from 'react';
 import { Header } from '../../components/layout/Header';
 
+export const revalidate = 0;
+
+
 export default function PublicLayout({
     children,
 }: Readonly<{

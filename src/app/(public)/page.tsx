@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { MessageCircle, Phone, Calendar } from "lucide-react";
+
+export const revalidate = 0;
 import { getSiteSettings, getTreatments } from "@/lib/api";
 import { TreatmentCard } from "@/components/ui/TreatmentCard";
 import { Button } from "@/components/ui/Button";
@@ -21,10 +23,10 @@ export default async function Home() {
                     {/* Left Text */}
                     <div className="flex-1 text-center md:text-left">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4">
-                            Natural Homeopathic <br className="hidden md:block" /> Treatment for Your Family
+                            {settings.hero_heading}
                         </h1>
                         <p className="text-gray-600 text-lg mb-8 max-w-lg mx-auto md:mx-0">
-                            Natural homeopathic medicine treatment for your family's health, ensuring long-term wellness without side effects.
+                            {settings.tagline}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                             <Button className="bg-accent-gold text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition">

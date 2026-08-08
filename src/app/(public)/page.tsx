@@ -12,7 +12,7 @@ export default async function Home() {
     const treatments = await getTreatments();
     const doctors = await getDoctors(3);
 
-    const callHref = settings.phone_number ? `tel:${settings.phone_number}` : `tel:+910000000000`;
+    const callHref = settings.emergency_contact ? `tel:${settings.emergency_contact}` : `tel:+910000000000`;
     const waHref = settings.whatsapp_number
         ? `https://wa.me/${settings.whatsapp_number.replace(/\D/g, '')}?text=Hello,%20I%20want%20to%20book%20an%20appointment`
         : `https://wa.me/910000000000?text=Hello`;
@@ -26,7 +26,7 @@ export default async function Home() {
                 intervalSec={settings.hero_slide_interval_sec}
                 heading={settings.hero_heading}
                 tagline={settings.tagline}
-                phone={settings.phone_number}
+                phone={settings.emergency_contact}
                 whatsapp={settings.whatsapp_number}
             />
 

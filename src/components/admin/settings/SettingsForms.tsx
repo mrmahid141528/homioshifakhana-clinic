@@ -215,8 +215,8 @@ export function ContactLocationForm({ initialData }: { initialData: any }) {
                     {errors.whatsapp_number && <p className="text-red-500 text-xs mt-1">{errors.whatsapp_number.message}</p>}
                 </div>
                 <div>
-                    <label className="block text-sm font-semibold mb-1">Emergency Contact</label>
-                    <input {...register('emergency_contact')} className="w-full border rounded-lg p-2 bg-gray-50 focus:outline-primary-dark-green" />
+                    <label className="block text-sm font-semibold mb-1">Calling Number (Call Now)</label>
+                    <input {...register('emergency_contact')} className="w-full border rounded-lg p-2 bg-gray-50 focus:outline-primary-dark-green" placeholder="e.g. +91 9876543210" />
                 </div>
             </div>
             <div>

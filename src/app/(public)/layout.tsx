@@ -17,7 +17,7 @@ export default async function PublicLayout({
             <Header
                 logoUrl={settings.logo_url}
                 clinicName={settings.clinic_name}
-                phone={settings.phone_number}
+                phone={settings.emergency_contact}
                 whatsapp={settings.whatsapp_number}
             />
             <main className="min-h-screen">

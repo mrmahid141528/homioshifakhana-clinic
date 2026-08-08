@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, MapPin, Clock, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 
-export function Header() {
+export function Header({ logoUrl, clinicName }: { logoUrl?: string, clinicName?: string }) {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -39,13 +39,20 @@ export function Header() {
 
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <div className="text-primary-dark-green flex flex-col items-center justify-center font-bold text-2xl">
-                            <span className="text-3xl leading-none">☤</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="font-bold text-xl text-primary-dark-green leading-none">হোমিও চিকিৎসা খানা</span>
-                            <span className="text-xs text-neutral-gray tracking-wide">Homeopathy Clinic</span>
-                        </div>
+                        {logoUrl ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={logoUrl} alt={clinicName || "Clinic Logo"} className="h-10 md:h-12 object-contain" />
+                        ) : (
+                            <>
+                                <div className="text-primary-dark-green flex flex-col items-center justify-center font-bold text-2xl">
+                                    <span className="text-3xl leading-none">☤</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="font-bold text-xl text-primary-dark-green leading-none">{clinicName || "হোমিও চিকিৎসা খানা"}</span>
+                                    <span className="text-xs text-neutral-gray tracking-wide">Homeopathy Clinic</span>
+                                </div>
+                            </>
+                        )}
                     </Link>
 
                     {/* Desktop Nav Links */}

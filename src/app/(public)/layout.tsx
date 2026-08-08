@@ -1,17 +1,20 @@
 import React from 'react';
 import { Header } from '../../components/layout/Header';
+import { getSiteSettings } from '@/lib/api';
 
 export const revalidate = 0;
 
 
-export default function PublicLayout({
+export default async function PublicLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const settings = await getSiteSettings();
+
     return (
         <>
-            <Header />
+            <Header logoUrl={settings.logo_url} clinicName={settings.clinic_name} />
             <main className="min-h-screen">
                 {children}
             </main>
@@ -19,12 +22,17 @@ export default function PublicLayout({
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Brand Info */}
                     <div className="md:col-span-2">
-                        <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span className="text-primary-dark-green bg-white rounded p-1 inline-block">☤</span>
-                            হোমিও চিকিৎসা খানা
-                        </h2>
+                        {settings.logo_url ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={settings.logo_url} alt="Logo" className="h-12 object-contain mb-4 bg-white p-2 rounded" />
+                        ) : (
+                            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                <span className="text-primary-dark-green bg-white rounded p-1 inline-block">☤</span>
+                                {settings.clinic_name || "হোমিও চিকিৎসা খানা"}
+                            </h2>
+                        )}
                         <p className="text-gray-400 max-w-sm mb-6 leading-relaxed">
-                            We provide 100% natural and effective homeopathic treatments. Over 20 years of excellence in chronic disease resolution.
+                            {settings.about_text || "We provide 100% natural and effective homeopathic treatments. Over 20 years of excellence in chronic disease resolution."}
                         </p>
                         <div className="flex gap-4 mb-8 md:mb-0">
                             <span className="px-3 py-1 bg-gray-800 text-xs rounded border border-gray-700">ISO Certified</span>

@@ -78,16 +78,16 @@ export function HeroSlider({ images, intervalSec, heading, tagline }: HeroSlider
             {/* Decorative background element to ensure text readability */}
             <div className="absolute inset-y-0 left-0 w-[95%] md:w-3/4 lg:w-2/3 bg-gradient-to-r from-teal-50/95 via-teal-50/70 to-transparent z-10 transition-all pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-4 py-16 md:py-32 relative z-20 w-full">
+            <div className="max-w-7xl mx-auto px-4 py-16 md:py-32 relative z-20 w-full flex">
                 {/* Left Text */}
-                <div className="w-11/12 sm:w-full md:w-1/2 lg:w-7/12 text-left transition-all">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm">
+                <div className="w-11/12 sm:w-full md:w-1/2 lg:w-7/12 !text-left flex flex-col items-start justify-center transition-all">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111827] leading-tight mb-4 drop-shadow-sm !text-left w-full">
                         {heading || "Natural Homeopathic Treatment"}
                     </h1>
-                    <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg font-medium">
+                    <p className="text-gray-600 text-base sm:text-lg mb-8 max-w-lg font-medium !text-left w-full">
                         {tagline || "Discover enduring health solutions for your family."}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-start">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-start w-full">
                         <Button className="bg-accent-gold text-white font-bold py-3 px-8 rounded-full border-none shadow-sm hover:shadow-md transition">
                             Call Now
                         </Button>

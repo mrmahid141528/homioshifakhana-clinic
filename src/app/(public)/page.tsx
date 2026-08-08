@@ -14,9 +14,12 @@ export default async function Home() {
         <div className="bg-white min-h-screen">
 
             {/* 2. Hero Section */}
-            <section className="relative bg-teal-50/50 overflow-hidden">
-                {/* Decorative background element simulating the image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-100/40 to-transparent z-0"></div>
+            <section
+                className="relative bg-teal-50/50 overflow-hidden"
+                style={settings.hero_image_url ? { backgroundImage: `url(${settings.hero_image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+            >
+                {/* Decorative background element to ensure text readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-50/95 via-teal-50/80 to-transparent z-0"></div>
 
                 <div className="max-w-7xl mx-auto px-4 pt-16 pb-32 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
 
